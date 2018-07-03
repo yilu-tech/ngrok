@@ -5,6 +5,7 @@ RUN apk add --update alpine-sdk git
 
 RUN git clone https://github.com/inconshreveable/ngrok.git /ngrok
 COPY startup /startup
+RUN chmod +x /start
 
 VOLUME [ "/ngrok/bin/windows_amd64" ]
 EXPOSE 4443 80 443
