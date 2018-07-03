@@ -1,16 +1,8 @@
 #!/bin/sh
 
-mkdir -p /ngrok/ssl && cd /ngrok/ssl
-
-openssl genrsa -out rootCA.key 2048
-openssl req -x509 -new -nodes -key rootCA.key -subj "/CN=$HOSTNAME" -days 5000 -out rootCA.pem
-openssl genrsa -out device.key 2048
-openssl req -new -key device.key -subj "/CN=$HOSTNAME" -out device.csr
-openssl x509 -req -in device.csr -CA rootCA.pem -CAkey rootCA.key -CAcreateserial -out device.crt -days 5000
-
-cp /ngrok/ssl/rootCA.pem /ngrok/assets/client/tls/ngrokroot.crt -f
-cp /ngrok/ssl/device.crt /ngrok/assets/server/tls/snakeoil.crt -f
-cp /ngrok/ssl/device.key /ngrok/assets/server/tls/snakeoil.key -f
+cp /ngrok/ssl/ngrokroot.crt /ngrok/assets/client/tls/ngrokroot.crt -f
+cp /ngrok/ssl/snakeoil.crt /ngrok/assets/server/tls/snakeoil.crt -f
+cp /ngrok/ssl/snakeoil.key /ngrok/assets/server/tls/snakeoil.key -f
 
 cd /ngrok
 
